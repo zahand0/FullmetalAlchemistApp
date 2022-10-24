@@ -25,6 +25,8 @@ class DatabaseConverter {
     @TypeConverter
     fun convertMilitaryRankToString(rank: MilitaryRank): String {
         return StringBuilder()
+            .append(rank.type)
+            .append(separator)
             .append(rank.rankName)
             .append(separator)
             .append(rank.img)
@@ -34,6 +36,10 @@ class DatabaseConverter {
     @TypeConverter
     fun convertStringToMilitaryRank(string: String): MilitaryRank {
         val stringData = string.split(separator)
-        return MilitaryRank (stringData[0], stringData[1])
+        return MilitaryRank(
+            stringData[0],
+            stringData[1],
+            stringData[2]
+        )
     }
 }
