@@ -5,6 +5,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
     primary = Purple200,
@@ -33,6 +36,23 @@ fun FullmetalAlchemistAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), conte
         DarkColorPalette
     } else {
         LightColorPalette
+    }
+
+    val systemUiController = rememberSystemUiController()
+    val statusBarColor = if (isSystemInDarkTheme()) Color.Black else Purple700
+    val navigationBarColor = if (isSystemInDarkTheme()) Grey900 else DeepPurple400
+    DisposableEffect(systemUiController) {
+        // Update all of the system bar colors to be transparent, and use
+        // dark icons if we're in light theme
+        systemUiController.setStatusBarColor(
+            color = statusBarColor,
+            darkIcons = false
+        )
+        systemUiController.setNavigationBarColor(
+            color = navigationBarColor,
+            darkIcons = false
+        )
+        onDispose {}
     }
 
     MaterialTheme(
