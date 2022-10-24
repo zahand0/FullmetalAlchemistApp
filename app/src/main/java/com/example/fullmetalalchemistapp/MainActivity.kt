@@ -15,7 +15,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.fullmetalalchemistapp.ui.theme.FullmetalAlchemistAppTheme
 import com.example.fullmetalalchemistapp.navigation.SetupNavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     
     private lateinit var navController: NavHostController
