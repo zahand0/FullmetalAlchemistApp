@@ -10,17 +10,24 @@ import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
+    primary = Purple700,
+    primaryVariant = Purple500,
     secondary = Teal200,
-    background = DarkGrey
+    background = Grey900,
+    surface = Grey900,
+    onBackground = LightGrey,
+    onSurface = LightGrey,
+    onPrimary = Color.White
 )
 
 private val LightColorPalette = lightColors(
     primary = Purple500,
     primaryVariant = Purple700,
     secondary = Teal200,
-    background = LightGrey
+    background = Color.White,
+    surface = Purple700,
+    onBackground = DarkGrey,
+//    onPrimary = Color.White
 
     /* Other default colors to override
     background = Color.White,
@@ -33,7 +40,10 @@ private val LightColorPalette = lightColors(
 )
 
 @Composable
-fun FullmetalAlchemistAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
+fun FullmetalAlchemistAppTheme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit
+) {
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
@@ -41,8 +51,8 @@ fun FullmetalAlchemistAppTheme(darkTheme: Boolean = isSystemInDarkTheme(), conte
     }
 
     val systemUiController = rememberSystemUiController()
-    val statusBarColor = if (isSystemInDarkTheme()) Color.Black else Purple700
-    val navigationBarColor = if (isSystemInDarkTheme()) Grey900 else DeepPurple400
+    val statusBarColor = colors.surface
+    val navigationBarColor = Color.Black
     DisposableEffect(systemUiController) {
         // Update all of the system bar colors to be transparent, and use
         // dark icons if we're in light theme
