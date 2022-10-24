@@ -4,7 +4,6 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.fullmetalalchemistapp.util.Constants.HERO_DATABASE_TABLE
 import com.example.models.MilitaryRank
-import com.example.models.Species
 
 @Entity(tableName = HERO_DATABASE_TABLE)
 data class Hero(
@@ -16,7 +15,7 @@ data class Hero(
     val alias: String,
     val rating: Double,
     val about: String,
-    val species: Species,
+    val species: String,
     val militaryRank: MilitaryRank,
     val abilities: List<String>,
     val weapons: List<String>
