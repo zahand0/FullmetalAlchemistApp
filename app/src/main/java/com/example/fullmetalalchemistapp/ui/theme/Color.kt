@@ -1,5 +1,8 @@
 package com.example.fullmetalalchemistapp.ui.theme
 
+import androidx.compose.material.Colors
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 
 val Purple200 = Color(0xFFBB86FC)
@@ -19,6 +22,15 @@ val Indigo100 = Color(0xFFc5cae9)
 val LightBlue50 = Color(0xFFe1f5fe)
 val LightBlue100 = Color(0xFFb3e5fc)
 
-
 val Grey900 = Color(0xFF212121)
+
+val LightGrey = Color(0xFFD8D8D8)
+val DarkGrey = Color(0xFF2A2A2A)
+
+val Colors.backgroundColorBrush
+    @Composable
+    get() = if (isLight)
+        Brush.verticalGradient(listOf(Purple700, DeepPurple400))
+    else
+        Brush.verticalGradient(listOf(Color.Black, Grey900))
 
