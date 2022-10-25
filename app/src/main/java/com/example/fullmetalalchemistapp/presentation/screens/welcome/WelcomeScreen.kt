@@ -18,15 +18,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.fullmetalalchemistapp.R
 import com.example.fullmetalalchemistapp.domain.model.OnBoardingPage
+import com.example.fullmetalalchemistapp.navigation.Screen
 import com.example.fullmetalalchemistapp.ui.theme.*
 import com.google.accompanist.pager.*
 
 @ExperimentalPagerApi
 @Composable
-fun WelcomeScreen(navController: NavHostController) {
+fun WelcomeScreen(
+    navController: NavHostController,
+    welcomeViewModel: WelcomeViewModel = hiltViewModel()
+) {
     val pages = listOf(
         OnBoardingPage.First,
         OnBoardingPage.Second,
@@ -65,7 +70,9 @@ fun WelcomeScreen(navController: NavHostController) {
                 .weight(1f),
             pagerState = pagerState
         ) {
-            
+            navController.popBackStack()
+            navController.navigate(Screen.Home.route)
+            welcomeViewModel.saveOnBoardingState(completed = true)
         }
     }
 }
