@@ -8,7 +8,9 @@ object Constants {
     const val HERO_DATABASE_TABLE = "hero_table"
     const val HERO_REMOTE_KEY_DATABASE_TABLE = "hero_remote_key_table"
 
-    const val PREFERENCES_NAME = "fma_preferences"
+    const val PREFERENCES_NAME = "fullmetal_alchemist_preferences"
     const val PREFERENCES_KEY = "on_boarding_completed"
+
+    const val BASE_URL = "http://10.0.2.2:8080"
 
 }
