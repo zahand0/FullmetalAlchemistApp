@@ -1,8 +1,12 @@
 package com.example.fullmetalalchemistapp.di
 
 import android.content.Context
-import com.example.fullmetalalchemistapp.data.pref.DataStoreOperationsImpl
+import com.example.fullmetalalchemistapp.data.repository.DataStoreOperationsImpl
+import com.example.fullmetalalchemistapp.data.repository.Repository
 import com.example.fullmetalalchemistapp.domain.repository.DataStoreOperations
+import com.example.fullmetalalchemistapp.domain.use_cases.UseCases
+import com.example.fullmetalalchemistapp.domain.use_cases.read_onboarding.ReadOnBoardingUseCase
+import com.example.fullmetalalchemistapp.domain.use_cases.save_onboarding.SaveOnBoardingUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +24,15 @@ object RepositoryModule {
         @ApplicationContext context: Context
     ): DataStoreOperations {
         return DataStoreOperationsImpl(context = context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUseCases(repository: Repository): UseCases {
+        return UseCases(
+            saveOnBoardingUseCase = SaveOnBoardingUseCase(repository),
+            readOnBoardingUseCase = ReadOnBoardingUseCase(repository)
+        )
     }
 
 }
