@@ -6,10 +6,10 @@ import androidx.room.TypeConverters
 import com.example.fullmetalalchemistapp.data.local.dao.HeroDao
 import com.example.fullmetalalchemistapp.data.local.dao.HeroRemoteKeyDao
 import com.example.fullmetalalchemistapp.domain.model.Hero
-import com.example.fullmetalalchemistapp.domain.model.HeroRemoteKey
+import com.example.fullmetalalchemistapp.domain.model.HeroRemoteKeys
 
 @Database(
-    entities = [Hero::class, HeroRemoteKey::class],
+    entities = [Hero::class, HeroRemoteKeys::class],
     version = 1
 )
 @TypeConverters(DatabaseConverter::class)
