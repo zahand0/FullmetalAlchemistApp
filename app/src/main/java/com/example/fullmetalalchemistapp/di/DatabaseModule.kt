@@ -2,6 +2,7 @@ package com.example.fullmetalalchemistapp.di
 
 import android.content.Context
 import androidx.room.Room
+import androidx.room.RoomDatabase
 import com.example.fullmetalalchemistapp.data.local.FullmetalAlchemistDatabase
 import com.example.fullmetalalchemistapp.util.Constants.FULLMETAL_ALCHEMIST_DATABASE
 import dagger.Module
@@ -19,10 +20,12 @@ object DatabaseModule {
     @Singleton
     fun provideDatabase(
         @ApplicationContext context: Context
-    ) = Room.databaseBuilder(
-        context,
-        FullmetalAlchemistDatabase::class.java,
-        FULLMETAL_ALCHEMIST_DATABASE
-    ).build()
+    ): RoomDatabase {
+        return Room.databaseBuilder(
+            context,
+            FullmetalAlchemistDatabase::class.java,
+            FULLMETAL_ALCHEMIST_DATABASE
+        ).build()
+    }
 
 }
