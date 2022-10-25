@@ -1,4 +1,4 @@
-package com.example.fullmetalalchemistapp.data.pref
+package com.example.fullmetalalchemistapp.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -25,7 +25,7 @@ class DataStoreOperationsImpl(context: Context): DataStoreOperations {
 
     private val dataStore = context.dataStore
 
-    override suspend fun saveOnBoardingPage(completed: Boolean) {
+    override suspend fun saveOnBoardingState(completed: Boolean) {
         dataStore.edit { preferences ->
             preferences[PreferencesKey.onBoardingKey] = completed
         }

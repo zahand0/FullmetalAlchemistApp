@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DataStoreOperations {
 
-    suspend fun saveOnBoardingPage(completed: Boolean)
+    suspend fun saveOnBoardingState(completed: Boolean)
 
     fun readOnBoardingState(): Flow<Boolean>
 }
