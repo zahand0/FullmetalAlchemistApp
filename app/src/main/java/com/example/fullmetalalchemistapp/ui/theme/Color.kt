@@ -22,7 +22,9 @@ val Indigo100 = Color(0xFFc5cae9)
 val LightBlue50 = Color(0xFFe1f5fe)
 val LightBlue100 = Color(0xFFb3e5fc)
 
+val Grey800 = Color(0xFF323232)
 val Grey900 = Color(0xFF212121)
+val Grey950 = Color(0xFF202020)
 
 val LightGrey = Color(0xFFD8D8D8)
 val DarkGrey = Color(0xFF1A1A1A)
@@ -34,10 +36,11 @@ val Colors.backgroundColorBrush
     else
         Brush.verticalGradient(listOf(Grey900, Color.Black))
 
-//val Colors.activeIndicatorColor
-//    @Composable
-//    get() = this.primary
-
 val Colors.inactiveIndicatorColor
     @Composable
     get() = if (isLight) LightGrey else DarkGrey
+
+val Colors.topAppBarBackgroundColor: Color
+    @Composable
+    get() = if (isLight) Purple700 else Grey950
+//    get() = this.surface
