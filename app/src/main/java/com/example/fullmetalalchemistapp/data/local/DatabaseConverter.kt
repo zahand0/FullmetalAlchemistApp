@@ -1,7 +1,7 @@
 package com.example.fullmetalalchemistapp.data.local
 
 import androidx.room.TypeConverter
-import com.example.models.MilitaryRank
+import com.example.fullmetalalchemistapp.domain.model.MilitaryRank
 
 class DatabaseConverter {
 
