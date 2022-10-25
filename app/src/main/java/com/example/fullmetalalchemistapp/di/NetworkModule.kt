@@ -1,6 +1,10 @@
 package com.example.fullmetalalchemistapp.di
 
+import androidx.paging.ExperimentalPagingApi
+import com.example.fullmetalalchemistapp.data.local.FullmetalAlchemistDatabase
 import com.example.fullmetalalchemistapp.data.remote.FullmetalAlchemistApi
+import com.example.fullmetalalchemistapp.data.repository.RemoteDataSourceImpl
+import com.example.fullmetalalchemistapp.domain.repository.RemoteDataSource
 import com.example.fullmetalalchemistapp.util.Constants.BASE_URL
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -15,6 +19,7 @@ import retrofit2.Retrofit
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+@ExperimentalPagingApi
 @ExperimentalSerializationApi
 @Module
 @InstallIn(SingletonComponent::class)
@@ -46,4 +51,15 @@ object NetworkModule {
         return retrofit.create(FullmetalAlchemistApi::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideRemoteDataSource(
+        fullmetalAlchemistApi: FullmetalAlchemistApi,
+        fullmetalAlchemistDatabase: FullmetalAlchemistDatabase
+    ): RemoteDataSource {
+        return RemoteDataSourceImpl(
+            fullmetalAlchemistApi = fullmetalAlchemistApi,
+            fullmetalAlchemistDatabase = fullmetalAlchemistDatabase
+        )
+    }
 }
