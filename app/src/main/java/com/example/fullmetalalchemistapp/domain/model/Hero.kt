@@ -3,8 +3,9 @@ package com.example.fullmetalalchemistapp.domain.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.fullmetalalchemistapp.util.Constants.HERO_DATABASE_TABLE
-import com.example.models.MilitaryRank
+import kotlinx.serialization.Serializable
 
+@Serializable
 @Entity(tableName = HERO_DATABASE_TABLE)
 data class Hero(
     @PrimaryKey(autoGenerate = false)
