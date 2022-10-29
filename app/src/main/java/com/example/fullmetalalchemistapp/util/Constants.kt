@@ -16,7 +16,6 @@ object Constants {
     const val ITEMS_PER_PAGE = 3
 
     const val MAX_STARS_NUMBER = 5
-
     const val MAX_RATING_NUMBER = 10.0
 
 }
