@@ -1,5 +1,6 @@
 package com.example.fullmetalalchemistapp.data.paging_source
 
+import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -9,6 +10,8 @@ import com.example.fullmetalalchemistapp.data.local.FullmetalAlchemistDatabase
 import com.example.fullmetalalchemistapp.data.remote.FullmetalAlchemistApi
 import com.example.fullmetalalchemistapp.domain.model.Hero
 import com.example.fullmetalalchemistapp.domain.model.HeroRemoteKeys
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @ExperimentalPagingApi
@@ -18,8 +21,20 @@ class HeroRemoteMediator @Inject constructor(
 ): RemoteMediator<Int, Hero>() {
 
     private val heroDao = fullmetalAlchemistDatabase.heroDao()
-
     private val heroRemoteKeysDao = fullmetalAlchemistDatabase.heroRemoteKeysDao()
+
+    override suspend fun initialize(): InitializeAction {
+        val currentTime = System.currentTimeMillis()
+        val lastUpdated = heroRemoteKeysDao.getRemoteKeys(1)?.lastUpdated ?: 0L
+        val cacheTimeout = 1440
+
+        val diffInMinutes = (currentTime - lastUpdated) / 1000 / 60
+        return if (diffInMinutes.toInt() <= cacheTimeout) {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        } else {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+    }
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, Hero>): MediatorResult {
         return try {
@@ -59,7 +74,8 @@ class HeroRemoteMediator @Inject constructor(
                         HeroRemoteKeys(
                             id = hero.id,
                             prevPage = prevPage,
-                            nextPage = nextPage
+                            nextPage = nextPage,
+                            lastUpdated = response.lastUpdated
                         )
                     }
                     heroRemoteKeysDao.addAllRemoteKeys(heroRemoteKeys = keys)
@@ -99,6 +115,13 @@ class HeroRemoteMediator @Inject constructor(
                 heroRemoteKeysDao.getRemoteKeys(heroId = hero.id)
             }
     }
+
+//    private fun parseMillis(millis: Long): String {
+//        val date = Date(millis)
+//        val format = SimpleDateFormat("HH:mm", Locale.getDefault())
+//        return format.format(date)
+//    }
+
 }
 
 
