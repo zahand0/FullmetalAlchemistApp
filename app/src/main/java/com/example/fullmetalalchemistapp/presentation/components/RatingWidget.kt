@@ -27,13 +27,13 @@ import com.example.fullmetalalchemistapp.util.Constants.MAX_STARS_NUMBER
 
 @Composable
 fun RatingWidget(
+    modifier: Modifier = Modifier,
     rating: Double,
     maxRating: Double = MAX_RATING_NUMBER,
     starFilledColor: Color,
     starUnfilledColor: Color = Color.LightGray.copy(alpha = 0.5f),
     scaleFactor: Float = 3f,
-    spaceBetween: Dp = EXTRA_SMALL_PADDING,
-    modifier: Modifier = Modifier
+    spaceBetween: Dp = EXTRA_SMALL_PADDING
 ) {
     val result = calculateStars(
         rating = rating,
