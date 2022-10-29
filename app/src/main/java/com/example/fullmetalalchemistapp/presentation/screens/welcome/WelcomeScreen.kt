@@ -17,7 +17,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import com.example.fullmetalalchemistapp.R
@@ -58,7 +57,7 @@ fun WelcomeScreen(
         HorizontalPagerIndicator(
             pagerState = pagerState,
             activeColor = MaterialTheme.colors.primary,
-            inactiveColor = MaterialTheme.colors.inactiveIndicatorColor,
+            inactiveColor = inactiveIndicatorColor,
             indicatorWidth = PAGING_INDICATOR_WIDTH,
             spacing = PAGING_INDICATOR_SPACING,
             modifier = Modifier

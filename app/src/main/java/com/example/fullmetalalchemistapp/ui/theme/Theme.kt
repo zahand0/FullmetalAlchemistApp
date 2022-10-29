@@ -6,29 +6,30 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
-    primary = Purple700,
+    primary = Purple200,
     primaryVariant = Purple500,
     secondary = Teal200,
-    background = Grey900,
-    surface = DarkGrey,
-    onBackground = LightGrey,
-    onSurface = LightGrey,
-    onPrimary = LightGrey
+    background = DarkGrey,
+    surface = DarkGreyLighter,
+//    onBackground = LightGrey,
+//    onSurface = LightGrey,
+//    onPrimary = LightGrey
 )
 
 private val LightColorPalette = lightColors(
     primary = Purple500,
     primaryVariant = Purple700,
     secondary = Teal200,
-    background = Color.White,
-    surface = Purple700,
-    onBackground = DarkGrey,
-    onPrimary = Color.White,
-    onSurface = Color.White
+    background = LightCream300,
+    surface = LightCream400,
+//    onBackground = DarkGrey,
+//    onPrimary = Color.White,
+//    onSurface = Color.White
 
     /* Other default colors to override
     background = Color.White,
@@ -52,22 +53,13 @@ fun FullmetalAlchemistAppTheme(
     }
 
     val systemUiController = rememberSystemUiController()
-    val statusBarColor = colors.surface
-    val navigationBarColor = Color.Black
-    DisposableEffect(systemUiController) {
-        // Update all of the system bar colors to be transparent, and use
-        // dark icons if we're in light theme
+    DisposableEffect(key1 = true) {
         systemUiController.setStatusBarColor(
-            color = statusBarColor,
-            darkIcons = false
-        )
-        systemUiController.setNavigationBarColor(
-            color = navigationBarColor,
-            darkIcons = false
+            color = colors.background,
+            darkIcons = !darkTheme
         )
         onDispose {}
     }
-
     MaterialTheme(
         colors = colors,
         typography = Typography,

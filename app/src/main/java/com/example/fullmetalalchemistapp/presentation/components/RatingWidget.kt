@@ -31,7 +31,7 @@ fun RatingWidget(
     rating: Double,
     maxRating: Double = MAX_RATING_NUMBER,
     starFilledColor: Color,
-    starUnfilledColor: Color = Color.LightGray.copy(alpha = 0.5f),
+    starUnfilledColor: Color = Color.LightGray.copy(alpha = 0.7f),
     scaleFactor: Float = 3f,
     spaceBetween: Dp = EXTRA_SMALL_PADDING
 ) {
@@ -200,7 +200,7 @@ fun calculateStars(
         if (rating in 0.0..maxRating) {
             val starsFill = rating * maxStars / maxRating
             filledStars = starsFill.toInt()
-            if (starsFill - filledStars > 0.4995) {
+            if (starsFill - filledStars > 0.5005) {
                 filledStars++
             } else {
                 if (starsFill - filledStars > 0.0005) {

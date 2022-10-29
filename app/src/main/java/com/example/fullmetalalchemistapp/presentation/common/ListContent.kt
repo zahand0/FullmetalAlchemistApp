@@ -1,9 +1,11 @@
 package com.example.fullmetalalchemistapp.presentation.common
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.MaterialTheme
@@ -22,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.rememberAsyncImagePainter
 import com.example.fullmetalalchemistapp.R
 import com.example.fullmetalalchemistapp.domain.model.Hero
@@ -37,6 +40,25 @@ fun ListContent(
     heroes: LazyPagingItems<Hero>,
     navController: NavHostController
 ) {
+    Log.d("ListContent", heroes.loadState.toString())
+    LazyColumn(
+        contentPadding = PaddingValues(SMALL_PADDING),
+        verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
+    ) {
+        items(
+            items = heroes,
+            key = { hero ->
+                hero.id
+            }
+        ) { hero ->
+            hero?.let {
+                HeroItem(
+                    hero = it,
+                    navController = navController
+                )
+            }
+        }
+    }
 
 }
 
@@ -62,7 +84,7 @@ fun HeroItem(
             },
         contentAlignment = Alignment.BottomStart
     ) {
-        Surface(shape = Shapes.large) {
+        Surface(shape = RoundedCornerShape(LARGE_PADDING)) {
             Image(
                 modifier = Modifier.fillMaxSize(),
                 painter = painter,
@@ -87,7 +109,7 @@ fun HeroItem(
             ) {
                 Text(
                     text = hero.name,
-                    color = MaterialTheme.colors.onPrimary,
+                    color = LightCream100,
                     fontSize = MaterialTheme.typography.h5.fontSize,
                     fontWeight = FontWeight.Bold,
                     maxLines = 1,
@@ -95,7 +117,7 @@ fun HeroItem(
                 )
                 Text(
                     text = hero.about,
-                    color = Color.White.copy(alpha = ContentAlpha.medium),
+                    color = Color.White.copy(alpha = 0.8f),
                     fontSize = MaterialTheme.typography.subtitle1.fontSize,
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis
@@ -107,7 +129,7 @@ fun HeroItem(
                     RatingWidget(
                         modifier = Modifier.padding(end = SMALL_PADDING),
                         rating = hero.rating,
-                        starFilledColor = MaterialTheme.colors.primary
+                        starFilledColor = Amber300
                     )
                     Text(
                         text = "(${hero.rating})",

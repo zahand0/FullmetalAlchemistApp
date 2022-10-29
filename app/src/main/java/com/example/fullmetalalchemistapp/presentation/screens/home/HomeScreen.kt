@@ -1,6 +1,7 @@
 package com.example.fullmetalalchemistapp.presentation.screens.home
 
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,7 +27,7 @@ fun HomeScreen(
                 heroes = allHeroes,
                 navController = navController
             )
-        }
+        },
+        backgroundColor = MaterialTheme.colors.surface
     )
-
 }

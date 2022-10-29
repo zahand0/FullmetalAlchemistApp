@@ -10,7 +10,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fullmetalalchemistapp.R
 import com.example.fullmetalalchemistapp.ui.theme.FullmetalAlchemistAppTheme
-import com.example.fullmetalalchemistapp.ui.theme.topAppBarBackgroundColor
 
 @Composable
 fun HomeTopBar(
@@ -20,18 +19,20 @@ fun HomeTopBar(
         title = {
             Text(
                 text = "Explore",
-                color = MaterialTheme.colors.onPrimary
+                color = MaterialTheme.colors.onBackground
             )
         },
-        backgroundColor = MaterialTheme.colors.topAppBarBackgroundColor,
+        backgroundColor = MaterialTheme.colors.background,
         actions = {
             IconButton(onClick = onSearchClicked) {
                 Icon(
                     imageVector = Icons.Default.Search,
-                    contentDescription = stringResource(R.string.search_icon)
+                    contentDescription = stringResource(R.string.search_icon),
+                    tint = MaterialTheme.colors.primary
                 )
             }
-        }
+        },
+        elevation = 4.dp
     )
 }
 

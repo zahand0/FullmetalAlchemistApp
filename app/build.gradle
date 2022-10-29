@@ -103,6 +103,9 @@ dependencies {
     // System UI Controller - Accompanist
     implementation "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version"
 
+    // Navigation animation - Accompanist
+    implementation "com.google.accompanist:accompanist-navigation-animation:$accompanist_version"
+
     // Palette API
     implementation "androidx.palette:palette-ktx:1.0.0"
 
