@@ -1,6 +1,5 @@
 package com.example.fullmetalalchemistapp.data.paging_source
 
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -10,15 +9,13 @@ import com.example.fullmetalalchemistapp.data.local.FullmetalAlchemistDatabase
 import com.example.fullmetalalchemistapp.data.remote.FullmetalAlchemistApi
 import com.example.fullmetalalchemistapp.domain.model.Hero
 import com.example.fullmetalalchemistapp.domain.model.HeroRemoteKeys
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 @ExperimentalPagingApi
 class HeroRemoteMediator @Inject constructor(
     private val fullmetalAlchemistApi: FullmetalAlchemistApi,
     private val fullmetalAlchemistDatabase: FullmetalAlchemistDatabase
-): RemoteMediator<Int, Hero>() {
+) : RemoteMediator<Int, Hero>() {
 
     private val heroDao = fullmetalAlchemistDatabase.heroDao()
     private val heroRemoteKeysDao = fullmetalAlchemistDatabase.heroRemoteKeysDao()

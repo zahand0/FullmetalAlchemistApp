@@ -1,6 +1,5 @@
 package com.example.fullmetalalchemistapp.presentation.screens.splash
 
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.fullmetalalchemistapp.domain.use_cases.UseCases
@@ -15,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class SplashViewModel @Inject constructor(
     useCases: UseCases
-): ViewModel() {
+) : ViewModel() {
 
     private val _onBoardingCompleted = MutableStateFlow(false)
     val onBoardingCompleted: StateFlow<Boolean> = _onBoardingCompleted

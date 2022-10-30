@@ -11,14 +11,13 @@ import com.example.fullmetalalchemistapp.data.remote.FullmetalAlchemistApi
 import com.example.fullmetalalchemistapp.domain.model.Hero
 import com.example.fullmetalalchemistapp.domain.repository.RemoteDataSource
 import com.example.fullmetalalchemistapp.util.Constants.ITEMS_PER_PAGE
-import com.google.accompanist.pager.ExperimentalPagerApi
 import kotlinx.coroutines.flow.Flow
 
 @ExperimentalPagingApi
 class RemoteDataSourceImpl(
     private val fullmetalAlchemistApi: FullmetalAlchemistApi,
     private val fullmetalAlchemistDatabase: FullmetalAlchemistDatabase
-): RemoteDataSource {
+) : RemoteDataSource {
 
     private val heroDao = fullmetalAlchemistDatabase.heroDao()
 

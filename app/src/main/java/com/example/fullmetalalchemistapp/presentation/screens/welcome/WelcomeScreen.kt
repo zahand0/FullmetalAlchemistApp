@@ -53,7 +53,7 @@ fun WelcomeScreen(
         ) { position ->
             PagerScreen(onBoardingPage = pages[position])
         }
-        
+
         HorizontalPagerIndicator(
             pagerState = pagerState,
             activeColor = MaterialTheme.colors.primary,
@@ -153,9 +153,9 @@ fun FinishButton(
 @Preview(showBackground = true)
 @Composable
 fun FirstOnBoardScreenPreview() {
-        Column(modifier = Modifier.fillMaxSize()) {
-            PagerScreen(onBoardingPage = OnBoardingPage.First)
-        }
+    Column(modifier = Modifier.fillMaxSize()) {
+        PagerScreen(onBoardingPage = OnBoardingPage.First)
+    }
 }
 
 @Preview(showBackground = true)

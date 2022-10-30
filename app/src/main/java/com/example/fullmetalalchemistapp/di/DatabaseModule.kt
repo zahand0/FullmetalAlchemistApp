@@ -2,7 +2,6 @@ package com.example.fullmetalalchemistapp.di
 
 import android.content.Context
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.fullmetalalchemistapp.data.local.FullmetalAlchemistDatabase
 import com.example.fullmetalalchemistapp.util.Constants.FULLMETAL_ALCHEMIST_DATABASE
 import dagger.Module
