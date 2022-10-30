@@ -8,6 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.focus.FocusRequester
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.paging.compose.collectAsLazyPagingItems
 
 @Composable
 fun SearchScreen(
@@ -15,6 +16,7 @@ fun SearchScreen(
     searchViewModel: SearchViewModel = hiltViewModel()
 ) {
     val searchQuery by searchViewModel.searchQuery
+    val heroes = searchViewModel.searchedHeroes.collectAsLazyPagingItems()
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(Unit) {
@@ -28,7 +30,9 @@ fun SearchScreen(
                 onTextChange = {
                     searchViewModel.updateSearchQuery(query = it)
                 },
-                onSearchClicked = {},
+                onSearchClicked = {
+                    searchViewModel.searchHeroes(query = it)
+                },
                 onCloseClicked = {
                     navController.popBackStack()
                 },
