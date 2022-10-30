@@ -6,6 +6,8 @@ import androidx.annotation.DrawableRes
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -18,16 +20,21 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
 import com.example.fullmetalalchemistapp.R
+import com.example.fullmetalalchemistapp.domain.model.Hero
 import com.example.fullmetalalchemistapp.ui.theme.FullmetalAlchemistAppTheme
 import com.example.fullmetalalchemistapp.ui.theme.NETWORK_ERROR_ICON_HEIGHT
 import com.example.fullmetalalchemistapp.ui.theme.SMALL_PADDING
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import java.net.ConnectException
 import java.net.SocketTimeoutException
 
 @Composable
 fun EmptyScreen(
-    error: LoadState.Error? = null
+    error: LoadState.Error? = null,
+    heroes: LazyPagingItems<Hero>? = null
 ) {
     val context = LocalContext.current
     var message by remember {
@@ -65,7 +72,9 @@ fun EmptyScreen(
     EmptyContent(
         message = message,
         icon = icon,
-        alphaAnim = alphaAnim
+        alphaAnim = alphaAnim,
+        heroes = heroes,
+        error = error
     )
 }
 
@@ -73,31 +82,47 @@ fun EmptyScreen(
 fun EmptyContent(
     message: String,
     @DrawableRes icon: Int,
-    alphaAnim: Float
+    alphaAnim: Float,
+    heroes: LazyPagingItems<Hero>? = null,
+    error: LoadState.Error? = null
 ) {
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
+
+    var isRefreshing by remember { mutableStateOf(false) }
+    SwipeRefresh(
+        swipeEnabled = error != null,
+        state = rememberSwipeRefreshState(isRefreshing = isRefreshing),
+        onRefresh = {
+            isRefreshing = true
+            heroes?.refresh()
+            isRefreshing = false
+        }
     ) {
-        Icon(
+        Column(
             modifier = Modifier
-                .size(NETWORK_ERROR_ICON_HEIGHT)
-                .alpha(alphaAnim),
-            painter = painterResource(id = icon),
-            contentDescription = stringResource(R.string.network_error_icon),
-            tint = MaterialTheme.colors.onSurface
-        )
-        Text(
-            modifier = Modifier
-                .padding(top = SMALL_PADDING)
-                .alpha(alphaAnim),
-            text = message,
-            color = MaterialTheme.colors.onSurface,
-            textAlign = TextAlign.Center,
-            fontWeight = FontWeight.Medium,
-            fontSize = MaterialTheme.typography.subtitle1.fontSize
-        )
+                .fillMaxSize()
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Icon(
+                modifier = Modifier
+                    .size(NETWORK_ERROR_ICON_HEIGHT)
+                    .alpha(alphaAnim),
+                painter = painterResource(id = icon),
+                contentDescription = stringResource(R.string.network_error_icon),
+                tint = MaterialTheme.colors.onSurface
+            )
+            Text(
+                modifier = Modifier
+                    .padding(top = SMALL_PADDING)
+                    .alpha(alphaAnim),
+                text = message,
+                color = MaterialTheme.colors.onSurface,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Medium,
+                fontSize = MaterialTheme.typography.subtitle1.fontSize
+            )
+        }
     }
 }
 
