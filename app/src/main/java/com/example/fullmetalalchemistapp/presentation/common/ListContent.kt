@@ -46,6 +46,7 @@ fun ListContent(
     val result = handlePagingResult(heroes = heroes)
     if (result) {
         LazyColumn(
+            modifier = modifier,
             contentPadding = PaddingValues(SMALL_PADDING),
             verticalArrangement = Arrangement.spacedBy(SMALL_PADDING)
         ) {
@@ -78,7 +79,6 @@ fun handlePagingResult(
             loadState.append is LoadState.Error -> loadState.append as LoadState.Error
             else -> null
         }
-
         return when {
             loadState.refresh is LoadState.Loading -> {
                 ShimmerEffect()
@@ -86,6 +86,10 @@ fun handlePagingResult(
             }
             error != null -> {
                 EmptyScreen(error = error)
+                false
+            }
+            heroes.itemCount < 1 -> {
+                EmptyScreen()
                 false
             }
             else -> true
