@@ -12,6 +12,8 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -26,13 +28,15 @@ fun SearchTopBar(
     text: String,
     onTextChange: (String) -> Unit,
     onSearchClicked: (String) -> Unit,
-    onCloseClicked: () -> Unit
+    onCloseClicked: () -> Unit,
+    focusRequester: FocusRequester
 ) {
     SearchWidget(
         text = text,
         onTextChange = onTextChange,
         onSearchClicked = onSearchClicked,
-        onCloseClicked = onCloseClicked
+        onCloseClicked = onCloseClicked,
+        focusRequester = focusRequester
     )
 }
 
@@ -42,6 +46,7 @@ fun SearchWidget(
     onTextChange: (String) -> Unit,
     onSearchClicked: (String) -> Unit,
     onCloseClicked: () -> Unit,
+    focusRequester: FocusRequester
 ) {
     Surface(
         modifier = Modifier
@@ -52,7 +57,8 @@ fun SearchWidget(
     ) {
         TextField(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .focusRequester(focusRequester),
             value = text,
             onValueChange = { onTextChange(it) },
             placeholder = {
@@ -123,7 +129,8 @@ fun SearchWidgetPreview() {
                 text = "",
                 onTextChange = {},
                 onSearchClicked = {},
-                onCloseClicked = {}
+                onCloseClicked = {},
+                focusRequester = FocusRequester()
             )
         }
     }
