@@ -1,6 +1,5 @@
 package com.example.fullmetalalchemistapp.presentation.screens.search
 
-import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -8,12 +7,9 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.fullmetalalchemistapp.domain.model.Hero
 import com.example.fullmetalalchemistapp.domain.use_cases.UseCases
-import com.example.fullmetalalchemistapp.domain.use_cases.search_heroes.SearchHeroesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
