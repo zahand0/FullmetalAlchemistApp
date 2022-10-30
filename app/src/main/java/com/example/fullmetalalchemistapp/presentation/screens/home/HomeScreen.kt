@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.example.fullmetalalchemistapp.navigation.Screen
 import com.example.fullmetalalchemistapp.presentation.common.ListContent
 
 @Composable
@@ -19,7 +20,11 @@ fun HomeScreen(
 
     Scaffold(
         topBar = {
-            HomeTopBar(onSearchClicked = {})
+            HomeTopBar(
+                onSearchClicked = {
+                    navController.navigate(Screen.Search.route)
+                }
+            )
         },
         content = { padding ->
             ListContent(
