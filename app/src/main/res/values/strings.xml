@@ -8,4 +8,6 @@
     <string name="internet_unavailable">Internet Unavailable.</string>
     <string name="unknown_error">Unknown error.</string>
     <string name="network_error_icon">Network Error Icon</string>
+    <string name="search_here">Search here...</string>
+    <string name="close_icon">Close Icon</string>
 </resources>
