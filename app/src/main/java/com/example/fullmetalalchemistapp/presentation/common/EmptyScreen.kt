@@ -22,6 +22,8 @@ import com.example.fullmetalalchemistapp.R
 import com.example.fullmetalalchemistapp.ui.theme.FullmetalAlchemistAppTheme
 import com.example.fullmetalalchemistapp.ui.theme.NETWORK_ERROR_ICON_HEIGHT
 import com.example.fullmetalalchemistapp.ui.theme.SMALL_PADDING
+import java.net.ConnectException
+import java.net.SocketTimeoutException
 
 @Composable
 fun EmptyScreen(
@@ -31,7 +33,7 @@ fun EmptyScreen(
     val message by remember {
         mutableStateOf(
             parseErrorMessage(
-                message = error.toString(),
+                error = error,
                 context = context
             )
         )
@@ -95,14 +97,14 @@ fun EmptyContent(
 }
 
 private fun parseErrorMessage(
-    message: String,
+    error: LoadState.Error,
     context: Context
 ): String {
-    return when {
-        message.contains("SocketTimeoutException") -> {
+    return when (error.error) {
+        is SocketTimeoutException -> {
             context.getString(R.string.server_unavailable)
         }
-        message.contains("ConnectException") -> {
+        is ConnectException -> {
             context.getString(R.string.internet_unavailable)
         }
         else -> {
